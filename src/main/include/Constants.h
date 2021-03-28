@@ -1,11 +1,15 @@
 #pragma once
-#include <string>
+#include <frc/shuffleboard/Shuffleboard.h>
 #include "networktables/NetworkTable.h"
+#include <string.h>
+#include <wpi/StringMap.h>
+#include "rev/CANSparkMax.h"
+#include "ctre/Phoenix.h"
 
-using namespace std;
-using namespace nt;
+// using namespace std;
+// using namespace nt;
 
-const string tabName = "Motor Controller Dashboard!";
+const std::string tabName = "Motor Controller Dashboard!";
 
 namespace custom2498
 {
@@ -41,7 +45,7 @@ namespace custom2498
         int can_id;
         const nt::NetworkTableEntry motorControlSlider;
         // TODO: implement initializor for spark max and talons ig?
-        rev::CANSparkMax canControllerSpark;
+        const rev::CANSparkMax canControllerSpark;
         ctre::phoenix::motorcontrol::can::WPI_TalonSRX canControllerTalon;
     protected:
         // nothing

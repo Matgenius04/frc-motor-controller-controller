@@ -98,10 +98,10 @@ void Robot::TestPeriodic()
   using namespace frc;
   // loop over all the motors?
   // ShuffleboardTab &tab = Shuffleboard::GetTab(tabName);
-  for (auto motor : loadedMotors.GetMotorControllerInfoVector()) {
-    printf("%g", motor.GetMotorControlSliderValue());
+  // for (auto motor : loadedMotors.GetMotorControllerInfoVector()) {
+  //   printf("%g", motor.GetMotorControlSliderValue());
 
-  }
+  // }
 }
 
 #ifndef RUNNING_FRC_TESTS

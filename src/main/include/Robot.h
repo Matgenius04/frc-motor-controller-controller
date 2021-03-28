@@ -30,16 +30,16 @@ private:
   // TODO: implement
   custom2498::LoadedMotors loadedMotors{
       std::vector<custom2498::MotorControllerInfo> {
-          custom2498::MotorControllerInfo(
+          custom2498::MotorControllerInfo {
               "Green",
               5,
               custom2498::MotorType::SparkMax
-          ),
-          custom2498::MotorControllerInfo(
+          },
+          custom2498::MotorControllerInfo {
               "Intake Tunnel",
               6,
               custom2498::MotorType::SparkMax
-          )
+          }
       }
   };
 };
