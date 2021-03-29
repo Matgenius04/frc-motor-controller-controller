@@ -6,6 +6,7 @@
 #include "rev/CANSparkMax.h"
 #include "frc/WPIlib.h"
 #include "ctre/Phoenix.h"
+#include <frc/drive/MecanumDrive.h>
 // #define NULL nullptr
 
 // using namespace frc;
@@ -48,15 +49,24 @@ custom2498::MotorControllerInfo::MotorControllerInfo(std::string nameParam, int 
                                                          .GetEntry();
 }
 
+void custom2498::MotorControllerInfo::UpdateMotorController()
+{
+    
+}
+
 double custom2498::MotorControllerInfo::GetMotorControlSliderValue()
 {
     return motorControlSlider.GetDouble(0.0);
 }
 
-custom2498::LoadedMotors::LoadedMotors(std::vector<MotorControllerInfo> MotorControllerInfoVectorParam)
+custom2498::LoadedMotors::LoadedMotors(std::vector<MotorControllerInfo> MotorControllerInfoVectorParam, bool robotDrive = false, int fr = -1, int fl = -1, int rr = -1, int rl = -1)
 {
     // TODO: figure out how to use pointers instead of copying the vector like an idiot
     std::vector<MotorControllerInfo> MotorControllerInfoVector(MotorControllerInfoVectorParam);
+    if (robotDrive == true) {
+        
+        // frc::MecanumDrive *mecanumDriveLocal {};
+    }
 }
 
 custom2498::LoadedMotors custom2498::LoadedMotors::FromJSON(std::string jsonFilename)

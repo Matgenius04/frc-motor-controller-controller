@@ -5,6 +5,7 @@
 #include <wpi/StringMap.h>
 #include "rev/CANSparkMax.h"
 #include "ctre/Phoenix.h"
+#include <frc/drive/MecanumDrive.h>
 
 // using namespace std;
 // using namespace nt;
@@ -38,15 +39,15 @@ namespace custom2498
         std::string name;
         // void setMotorControlSlider(NetworkTableEntry &entry);
         double GetMotorControlSliderValue();
+        void UpdateMotorController();
+        const rev::CANSparkMax *canControllerSpark;
+        const ctre::phoenix::motorcontrol::can::WPI_TalonSRX *canControllerTalon;
         MotorControllerInfo(std::string nameParam, int can_idParam, MotorControllerType MotorTypeParam);
-
     private:
         MotorControllerType motorType;
         int can_id;
         const nt::NetworkTableEntry motorControlSlider;
         // TODO: implement initializor for spark max and talons ig?
-        const rev::CANSparkMax *canControllerSpark;
-        ctre::phoenix::motorcontrol::can::WPI_TalonSRX *canControllerTalon;
     protected:
         // nothing
     };
@@ -56,10 +57,12 @@ namespace custom2498
     public:
         LoadedMotors FromJSON(std::string jsonFilename);
         std::vector<MotorControllerInfo> GetMotorControllerInfoVector();
-        LoadedMotors(std::vector<MotorControllerInfo> motorControllerInfoVector);
+        LoadedMotors(std::vector<MotorControllerInfo> motorControllerInfoVector, bool robotDrive = false, int fr = -1, int fl = -1, int rr = -1, int rl = -1);
     private:
+        custom2498::MotorControllerInfo getMotorControllerInfoByCan_id(int can_id);
         std::vector<MotorControllerInfo> MotorControllerInfoVector;
+        frc::MecanumDrive mecanumDrive;
     protected:
         // nothing
     };
-} // namespace custom
+} // namespace custom2498
