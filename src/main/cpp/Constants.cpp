@@ -15,24 +15,29 @@
 // using namespace rev;
 // also initializes all the shuffleboard components as well
 
-// custom2498::MotorControllerInfo 
+// custom2498:Controller:MotorControllerInfo 
 // custom2498::MotorControllerInfo
 
 // custom2498::MotorControllerInfo::MotorControllerInfo() {
 
 // };
-custom2498::MotorControllerInfo::MotorControllerInfo(std::string nameParam, int can_idParam, const MotorType MotorTypeParam)
+custom2498::MotorControllerInfo::MotorControllerInfo(std::string nameParam, int can_idParam, const MotorControllerType MotorTypeParam)
 {
     motorType = MotorTypeParam;
     can_id = can_idParam;
     // canControllerSpark {can_id, rev::CANSparkMax::MotorType::kBrushed};
-    rev::CANSparkMax{can_id, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
-    // if (motorType == custom2498::MotorType::SparkMax) {
-    //     // canControllerSpark = rev::CANSparkMax(can_id, rev::CANSparkMax::MotorType::kBrushed);
-    //     rev::CANSparkMax canControllerSpark {can_id, rev::CANSparkMax::MotorType::kBrushed};
-    // } else if (motorType == custom2498::MotorType::TalonSRX) {
-    //     ctre::phoenix::motorcontrol::can::WPI_TalonSRX canControllerTalon {can_id};
-    // }
+    
+    if (motorType == custom2498::MotorControllerType::SparkMax) {
+        // canControllerSpark = rev::CANSparkMax(can_id, rev::CANSparkMax::MotorType::kBrushed);
+        rev::CANSparkMax canControllerSparkLocal{can_id, rev::CANSparkMax::MotorType::kBrushed};
+        canControllerSpark = &canControllerSparkLocal;
+
+    } else if (motorType == custom2498::MotorControllerType::TalonSRX) {
+        ctre::phoenix::motorcontrol::can::WPI_TalonSRX canControllerTalonLocal{can_id};
+        canControllerTalon = &canControllerTalonLocal;
+    } else {
+        throw "BRUHHHH OTHER MOTOR CONTROLLERS NOT SUPPORTED";
+    }
     wpi::StringMap<std::shared_ptr<nt::Value>> properties{
         std::make_pair("min", nt::Value::MakeDouble(0)),
         std::make_pair("max", nt::Value::MakeDouble(1))};
@@ -41,23 +46,38 @@ custom2498::MotorControllerInfo::MotorControllerInfo(std::string nameParam, int 
                                                          .WithWidget(frc::BuiltInWidgets{frc::BuiltInWidgets::kNumberSlider})
                                                          .WithProperties(properties)
                                                          .GetEntry();
-};
+}
 
 double custom2498::MotorControllerInfo::GetMotorControlSliderValue()
 {
     return motorControlSlider.GetDouble(0.0);
-};
+}
 
-custom2498::LoadedMotors::LoadedMotors(std::vector<MotorControllerInfo> MotorControllerInfoVector)
+custom2498::LoadedMotors::LoadedMotors(std::vector<MotorControllerInfo> MotorControllerInfoVectorParam)
 {
     // TODO: figure out how to use pointers instead of copying the vector like an idiot
-    std::vector<MotorControllerInfo> MotorControllerInfoVector(MotorControllerInfoVector);
-};
+    std::vector<MotorControllerInfo> MotorControllerInfoVector(MotorControllerInfoVectorParam);
+}
 
 custom2498::LoadedMotors custom2498::LoadedMotors::FromJSON(std::string jsonFilename)
 {
     // TODO: parse json
     // return LoadedMotors
+    // placeholder for now
+    return custom2498::LoadedMotors {
+      std::vector<custom2498::MotorControllerInfo> {
+          custom2498::MotorControllerInfo {
+              "Green",
+              5,
+              custom2498::MotorControllerType::SparkMax
+          },
+          custom2498::MotorControllerInfo {
+              "Intake Tunnel",
+              6,
+              custom2498::MotorControllerType::SparkMax
+          }
+      }
+  };
 }
 
 std::vector<custom2498::MotorControllerInfo> custom2498::LoadedMotors::GetMotorControllerInfoVector()

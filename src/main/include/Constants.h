@@ -15,7 +15,7 @@ namespace custom2498
 {
     // TODO: rename to something that won't be confused as brushed vs brushless
     // because MotorType really should be something along the lines of MotorControllerType
-    enum MotorType
+    enum MotorControllerType
     {
         SparkMax,
         TalonSRX,
@@ -38,15 +38,15 @@ namespace custom2498
         std::string name;
         // void setMotorControlSlider(NetworkTableEntry &entry);
         double GetMotorControlSliderValue();
-        MotorControllerInfo(std::string nameParam, int can_idParam, MotorType MotorTypeParam);
+        MotorControllerInfo(std::string nameParam, int can_idParam, MotorControllerType MotorTypeParam);
 
     private:
-        MotorType motorType;
+        MotorControllerType motorType;
         int can_id;
         const nt::NetworkTableEntry motorControlSlider;
         // TODO: implement initializor for spark max and talons ig?
-        const rev::CANSparkMax canControllerSpark;
-        ctre::phoenix::motorcontrol::can::WPI_TalonSRX canControllerTalon;
+        const rev::CANSparkMax *canControllerSpark;
+        ctre::phoenix::motorcontrol::can::WPI_TalonSRX *canControllerTalon;
     protected:
         // nothing
     };

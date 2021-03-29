@@ -33,12 +33,12 @@ private:
           custom2498::MotorControllerInfo {
               "Green",
               5,
-              custom2498::MotorType::SparkMax
+              custom2498::MotorControllerType::SparkMax
           },
           custom2498::MotorControllerInfo {
               "Intake Tunnel",
               6,
-              custom2498::MotorType::SparkMax
+              custom2498::MotorControllerType::SparkMax
           }
       }
   };
