@@ -6,6 +6,7 @@
 #include "rev/CANSparkMax.h"
 #include "ctre/Phoenix.h"
 #include <frc/drive/MecanumDrive.h>
+#include <type_traits>
 
 // using namespace std;
 // using namespace nt;
@@ -33,6 +34,7 @@ namespace custom2498
 
     // custom class that contains the label/name,
     // the type of motor controller, and the type of motorControlSlider
+    template <typename MotorControllerInfo>
     class MotorControllerInfo
     {
     public:
@@ -57,11 +59,11 @@ namespace custom2498
     public:
         LoadedMotors FromJSON(std::string jsonFilename);
         std::vector<MotorControllerInfo> GetMotorControllerInfoVector();
-        LoadedMotors(std::vector<MotorControllerInfo> motorControllerInfoVector, bool robotDrive = false, int fr = -1, int fl = -1, int rr = -1, int rl = -1);
+        LoadedMotors(std::vector<MotorControllerInfo> motorControllerInfoVector, bool robotDrive = false, MotorControllerType robotDriveControllerType = MotorControllerType::Other, int fr = -1, int fl = -1, int rr = -1, int rl = -1);
     private:
         custom2498::MotorControllerInfo getMotorControllerInfoByCan_id(int can_id);
         std::vector<MotorControllerInfo> MotorControllerInfoVector;
-        frc::MecanumDrive mecanumDrive;
+        const frc::MecanumDrive *mecanumDrive;
     protected:
         // nothing
     };
