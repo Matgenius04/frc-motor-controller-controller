@@ -9,7 +9,7 @@ else:
 if os.path.exists("notereport.md"):
     os.remove("notereport.md")
 else:
-    print("NOTE: No previous notes repoort markdown found to delete. \n")
+    print("NOTE: No previous notes report markdown found to delete. \n")
 
 print("Creating new reports...")
 notesfile = open("notereport.md", "w+")

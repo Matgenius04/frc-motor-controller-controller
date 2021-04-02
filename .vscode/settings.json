@@ -16,8 +16,6 @@
   },
   "C_Cpp.default.configurationProvider": "vscode-wpilib",
   "files.associations": {
-    "math": "cpp",
-    "*.inc": "cpp",
     "array": "cpp",
     "atomic": "cpp",
     "hash_map": "cpp",
@@ -79,6 +77,7 @@
     "thread": "cpp",
     "cinttypes": "cpp",
     "typeinfo": "cpp",
-    "core": "cpp"
+    "*.inc": "cpp",
+    "math": "cpp"
   }
 }
