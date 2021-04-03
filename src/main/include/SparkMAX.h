@@ -7,9 +7,9 @@ namespace custom2498
     {
     public:
         SparkMAX(int canId, rev::CANSparkMax::MotorType MotorType);
-        virtual void SetSpeed(double speed);
+        void SetSpeed(double speed);
         // probably should be a virtual function and use type CANSparkMax
-        virtual frc::SpeedController* GetSpeedController();
+        frc::SpeedController* GetSpeedController();
 
     private:
         rev::CANSparkMax *motorControllerPointer_;

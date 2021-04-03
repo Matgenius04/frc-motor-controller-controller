@@ -20,7 +20,7 @@ namespace custom2498
         // MotorController(int canId, MotorControllerType motorControllerType);
         virtual void SetSpeed(double speed) = 0;
         virtual frc::SpeedController* GetSpeedController() = 0;
-        void Update(double number);
+        void Update(nt::Value* value);
     private:
         // speed set by operator
         int speed_;

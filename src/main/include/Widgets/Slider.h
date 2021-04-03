@@ -1,18 +1,17 @@
 #pragma once
+#include "Widgets/Widget.h"
 #include <wpi/StringRef.h>
 #include "networktables/NetworkTable.h"
 #include "frc/shuffleboard/Shuffleboard.h"
-namespace custom2498
+namespace custom2498::Widgets
 {
-    class Slider
+    class Slider : public Widget
     {
     public:
         Slider(std::string title, std::string tab);
-        double GetSliderData();
-        void SetSliderData(double number);
+        nt::NetworkTableEntry InitNetworkTable();
 
     private:
-        nt::NetworkTableEntry networkTable_;
-        std::string title_;
+        // nothing
     };
 } // namespace custom2498

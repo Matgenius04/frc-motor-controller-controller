@@ -2,10 +2,11 @@
 #include <ctre/phoenix/sensors/PigeonIMU.h>
 #include <frc/Joystick.h>
 #include <frc/drive/MecanumDrive.h>
+#include <cmath>
 #pragma once
 namespace custom2498
 {
-    class MecanumDrive
+    class MecanumDrive : public Updatable
     {
     public:
         MecanumDrive(
@@ -13,17 +14,18 @@ namespace custom2498
             MotorController *rr,
             MotorController *fl,
             MotorController *rl,
-            frc::Joystick stick,
-            frc::Joystick throttle);
+            frc::Joystick* stick,
+            frc::Joystick* throttle);
         MecanumDrive(
             MotorController *fr,
             MotorController *rr,
             MotorController *fl,
             MotorController *rl,
-            frc::Joystick stick,
-            frc::Joystick throttle,
-            ctre::phoenix::sensors::PigeonIMU pigeonIMU);
-        void Update();
+            frc::Joystick* stick,
+            frc::Joystick* throttle,
+            ctre::phoenix::sensors::PigeonIMU* pigeonIMU);
+
+        void Update(nt::Value* value);
 
     private:
         MotorController* fr_;

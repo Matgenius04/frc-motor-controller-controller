@@ -7,6 +7,8 @@
 #include <frc/TimedRobot.h>
 #include "Constants.h"
 #include "GUI.h"
+#include "SparkMAX.h"
+#include "Mecanum.h"
 
 class Robot : public frc::TimedRobot
 {

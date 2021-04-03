@@ -6,7 +6,7 @@ custom2498::MotorController::MotorController(int canId)
     // nothing
 }
 
-void custom2498::MotorController::Update(double number)
+void custom2498::MotorController::Update(nt::Value* value)
 {
-    SetSpeed(number);
+    SetSpeed(value->GetDouble());
 }

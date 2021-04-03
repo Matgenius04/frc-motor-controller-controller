@@ -18,15 +18,26 @@ void Robot::DisabledPeriodic() {}
 
 void Robot::TestInit()
 {
-  dashGui.AddSlider("FR Mec"            , guiTab, new custom2498::SparkMAX(1, rev::CANSparkMax::MotorType::kBrushless));
-  dashGui.AddSlider("FL Mec"            , guiTab, new custom2498::SparkMAX(2, rev::CANSparkMax::MotorType::kBrushless));
-  dashGui.AddSlider("RR Mec"            , guiTab, new custom2498::SparkMAX(3, rev::CANSparkMax::MotorType::kBrushless));
-  dashGui.AddSlider("RL Mec"            , guiTab, new custom2498::SparkMAX(4, rev::CANSparkMax::MotorType::kBrushless));
-  dashGui.AddSlider("Green"             , guiTab, new custom2498::SparkMAX(5, rev::CANSparkMax::MotorType::kBrushed));
-  dashGui.AddSlider("Tunnel Escalator"  , guiTab, new custom2498::SparkMAX(6, rev::CANSparkMax::MotorType::kBrushed));
-  dashGui.AddSlider("Shooter Motor 1"   , guiTab, new custom2498::SparkMAX(7, rev::CANSparkMax::MotorType::kBrushed));
-  dashGui.AddSlider("Shooter Motor 2"   , guiTab, new custom2498::SparkMAX(8, rev::CANSparkMax::MotorType::kBrushed));
-  dashGui.AddSlider("Purpule"           , guiTab, new custom2498::SparkMAX(9, rev::CANSparkMax::MotorType::kBrushed));
+  // dashGui.AddSlider("FR Mec"            , guiTab, new custom2498::SparkMAX(1, rev::CANSparkMax::MotorType::kBrushless));
+  // dashGui.AddSlider("FL Mec"            , guiTab, new custom2498::SparkMAX(2, rev::CANSparkMax::MotorType::kBrushless));
+  // dashGui.AddSlider("RR Mec"            , guiTab, new custom2498::SparkMAX(3, rev::CANSparkMax::MotorType::kBrushless));
+  // dashGui.AddSlider("RL Mec"            , guiTab, new custom2498::SparkMAX(4, rev::CANSparkMax::MotorType::kBrushless));
+
+  custom2498::MecanumDrive* mecanumDrive = new custom2498::MecanumDrive(
+    new custom2498::SparkMAX(1, rev::CANSparkMax::MotorType::kBrushless), //FR
+    new custom2498::SparkMAX(3, rev::CANSparkMax::MotorType::kBrushless), //RR
+    new custom2498::SparkMAX(2, rev::CANSparkMax::MotorType::kBrushless), //FL
+    new custom2498::SparkMAX(4, rev::CANSparkMax::MotorType::kBrushless), //RL
+    new frc::Joystick(stickChannel),
+    new frc::Joystick(throttleChannel),
+    new ctre::phoenix::sensors::PigeonIMU(pigeonId)
+  );
+  dashGui.AddMecanum("Mecanum Drive"     , guiTab, mecanumDrive);
+  dashGui.AddSlider ("Green"             , guiTab, new custom2498::SparkMAX(5, rev::CANSparkMax::MotorType::kBrushed));
+  dashGui.AddSlider ("Tunnel Escalator"  , guiTab, new custom2498::SparkMAX(6, rev::CANSparkMax::MotorType::kBrushed));
+  dashGui.AddSlider ("Shooter Motor 1"   , guiTab, new custom2498::SparkMAX(7, rev::CANSparkMax::MotorType::kBrushed));
+  dashGui.AddSlider ("Shooter Motor 2"   , guiTab, new custom2498::SparkMAX(8, rev::CANSparkMax::MotorType::kBrushed));
+  dashGui.AddSlider ("Purpule"           , guiTab, new custom2498::SparkMAX(9, rev::CANSparkMax::MotorType::kBrushed));
 };
 
 void Robot::TestPeriodic()
